@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escáner de QR</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: #007BFF;
+            text-align: center;
+        }
+
+        #qr-video {
+            width: 100%;
+            max-width: 600px;
+            border: 10px solid #007BFF;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #camera-select {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            cursor: pointer;
+            width: 250px;
+        }
+
+        #camera-select:focus {
+            outline: none;
+            border-color: #007BFF;
+        }
+
+        #qr-form {
+            display: none;
+        }
+
+        /* Estilo del botón */
+        .submit-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .submit-btn:active {
+            background-color: #004085;
+        }
+
+        /* Contenedor con estilo */
+        .container {
+            width: 100%;
+            max-width: 650px;
+            text-align: center;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Escáner de QR</h1>
+        <video id="qr-video" autoplay playsinline></video>
+        <select id="camera-select"></select>
+        <button class="submit-btn" onclick="document.getElementById('qr-form').submit()">Verificar QR</button>
+        <form id="qr-form" action="./salida.php" method="POST">
+            <input type="hidden" name="qr" id="qr-input">
+        </form>
+    </div>
+
+    <script src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let scanner = new Instascan.Scanner({ video: document.getElementById('qr-video') });
+            scanner.addListener('scan', function (content) {
+                document.getElementById('qr-input').value = content;
+                document.getElementById('qr-form').submit();
+            });
+
+            Instascan.Camera.getCameras().then(cameras => {
+                if (cameras.length > 0) {
+                    let cameraSelect = document.getElementById('camera-select');
+                    cameras.forEach((camera, i) => {
+                        let option = document.createElement('option');
+                        option.value = i;
+                        option.text = camera.name || `Cámara ${i + 1}`;
+                        cameraSelect.appendChild(option);
+                    });
+
+                    let defaultCamera = cameras.find(camera => camera.name && camera.name.toLowerCase().includes('back')) || cameras[0];
+                    let defaultIndex = cameras.indexOf(defaultCamera);
+                    cameraSelect.selectedIndex = defaultIndex;
+                    scanner.start(defaultCamera);
+
+                    cameraSelect.addEventListener('change', function () {
+                        scanner.start(cameras[this.value]);
+                    });
+                } else {
+                    console.error('No hay cámaras disponibles.');
+                }
+            }).catch(error => {
+                console.error('Error al obtener cámaras:', error);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

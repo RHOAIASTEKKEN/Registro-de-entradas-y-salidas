@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre con Efecto de Apertura Hacia Arriba</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            /* Añadido para visualización */
+        }
+
+        .sobre {
+            position: relative;
+            width: 200px;
+            height: 150px;
+            background-color: #ffffff;
+            border: 2px solid #000000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            /* Oculta el contenido fuera del contenedor */
+        }
+
+        .base {
+            width: 100%;
+            height: 100%;
+        }
+
+        .solapa {
+            z-index: 10;
+            position: absolute;
+            top: -100px;
+            /* Inicialmente coloca la solapa fuera de la vista */
+            width: 0;
+            height: 0;
+            border-left: 100px solid transparent;
+            border-right: 100px solid transparent;
+            border-top: 100px solid #ff0000;
+            /* Cambiado a border-top para abrir hacia arriba */
+            transform: rotate(180deg);
+            animation: abrirSobre 1s forwards;
+            /* Animación para abrir el sobre */
+        }
+
+        @keyframes abrirSobre {
+            0% {
+                top: -100px;
+
+                .sobre {
+                    height: 150px;
+
+                }
+            }
+
+            100% {
+                top: -100px;
+
+                .sobre {
+                    height: 250px;
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sobre">
+        <div class="base"></div>
+        <div class="solapa"></div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        *,
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        .container-letter {
+            margin-top: -100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 80vh;
+            z-index: -10;
+            transition: transform 0.75s, margin-top 0.75s;
+        }
+
+        .cover {
+            position: absolute;
+            border-left: 200px solid transparent;
+            border-right: 200px solid transparent;
+            border-top: 100px solid #e1e1e1;
+            border-bottom: 100px solid transparent;
+            transition: transform 0.75s;
+            transform-origin: top;
+            transform: rotateX(0deg);
+            z-index: -1;
+        }
+
+        .letter {
+            border-left: 200px solid #c7c7c7;
+            border-right: 200px solid #bbbbbb;
+            border-top: 100px solid transparent;
+            border-bottom: 100px solid #b2b2b2;
+            margin-top: -180px;
+        }
+
+        .options {
+            margin-top: 20px;
+        }
+
+        .options button {
+            color: #ff3234;
+            font-weight: 600;
+            border-radius: 3px;
+            background: #fad7df;
+            padding: 0.5rem 1rem;
+            border: 1px solid #fe3334;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .options button:hover {
+            background: #ff989e;
+            color: white;
+        }
+
+        /* Ajuste para que .container esté por encima */
+        .container {
+            position: relative;
+            top: 100vh;
+            z-index: 20;
+        }
+
+        /* Animación para abrir .container-letter */
+        @keyframes openAnimation {
+            from {
+                transform: scale(1);
+                margin-top: 0px;
+            }
+
+            to {
+                transform: scale(1.8);
+                margin-top: 600px;
+            }
+        }
+
+        /* Aplicar animación cuando .open-animation está presente */
+        .container-letter.open-animation {
+            animation: openAnimation 0.75s forwards;
+            /* forwards para mantener los estilos finales */
+        }
+
+        .curveado {
+            font-family: 'Dancing Script', cursive;
+            font-size: 24px;
+            color: #fff;
+            /* Ajusta el color según sea necesario */
+        }
+
+        .regular {
+            font-family: Arial, sans-serif;
+            color: #b8860b;
+            /* Color dorado oscuro */
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-image: url(./img/fondo.jpg);
+            background-size: cover;
+            /* Asegura que la imagen cubra todo el contenedor */
+            background-position: center;
+            /* Centra la imagen */
+            background-repeat: no-repeat;
+            /* Evita que la imagen se repita */
+        }
+
+        .container {
+            background-color: #000000;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+        }
+
+        .inf {
+            width: 90%;
+            text-align: left;
+        }
+
+        .inf p {
+            font-size: 10px;
+        }
+
+        .inf h1 {
+            font-size: 15px;
+        }
+
+        .img-text-music {
+            width: 90%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .img-text-music img {
+            width: 90%;
+            height: 75%;
+        }
+
+        .dats {
+            width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .container1 {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        button {
+            padding: 2px 10px;
+            font-size: 16px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .audio-lines {
+            display: flex;
+            gap: 5px;
+        }
+
+        .line {
+            width: 5px;
+            height: 20px;
+            background-color: #fff;
+            animation: bounce 1s infinite;
+        }
+
+        #line1 {
+            animation-delay: 0.1s;
+        }
+
+        #line2 {
+            animation-delay: 0.2s;
+        }
+
+        #line3 {
+            animation-delay: 0.3s;
+        }
+
+        #line4 {
+            animation-delay: 0.4s;
+        }
+
+        #line5 {
+            animation-delay: 0.5s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scaleY(1);
+            }
+
+            50% {
+                transform: scaleY(2);
+            }
+        }
+
+
+        .text-img {
+            width: 70%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+
+        .text-img section:first-child {
+            display: flex;
+            flex-direction: column;
+            gap: 100px;
+        }
+
+
+        .fecha {
+            margin-top: 150px;
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .reloj p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .reloj .time {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .reloj .time article {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #fff;
+
+        }
+
+        .reloj .time article span {
+            font-size: 48px;
+        }
+
+
+        .maps {
+            width: 100%;
+            margin-top: 50px;
+        }
+
+        .esperamos {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .todoaudio {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        span {
+            font-family: 'Dancing Script', cursive;
+            font-size: 20px;
+            color: #fff;
+            /* Ajusta el color según sea necesario */
+        }
+
+        .agradecimientos {
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+
+            h2 {
+                font-family: 'Dancing Script', cursive;
+                font-size: 50px;
+            }
+
+            h3 {
+                font-family: 'Dancing Script', cursive;
+                font-size: 30px;
+                margin-top: 20px;
+            }
+
+            p {
+                font-size: 18px;
+            }
+        }
+
+        /* Movimiento de izquierda a derecha para .imagen1 */
+        .imagen1 {
+            animation: slideRight 1s ease-out forwards;
+        }
+
+        @keyframes slideRight {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Movimiento de derecha a izquierda para .dats */
+        .dats {
+            animation: slideLeft 1s ease-out forwards;
+        }
+
+        @keyframes slideLeft {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Aparición desde abajo para .text-img, .maps, .fecha */
+        .text-img,
+        .maps,
+        .fecha {
+            opacity: 0;
+            animation: slideUp 1s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+
+        /* carta */
+        .paper {
+            /*  */
+            z-index: -10;
+            background: white;
+            width: 390px;
+            height: 180px;
+        }
+
+
+
+
+
+
+
+
+
+
+        @media (max-width: 800px) {
+            .img-text-music {
+                display: flex;
+                flex-direction: column;
+                place-items: center;
+                margin-bottom: 30px;
+            }
+
+            .text-img,
+            .fecha {
+                grid-template-columns: 1fr;
+            }
+
+            .text-img section:first-child {
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .img-text-music img {
+                width: 60%;
+            }
+        }
+
+
+        @media (max-width: 500px) {
+            .medi {
+                width: 100%;
+            }
+
+            .inf {
+                width: 90%;
+                text-align: center !important;
+
+            }
+
+            .sect-1p {
+                margin: 0 !important;
+            }
+
+            .inf span {
+                position: relative !important;
+            }
+
+            .reloj p {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+
+            .reloj .time {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .reloj .time article span {
+                font-size: 20px;
+            }
+
+            .dats {
+                width: 100%;
+            }
+
+
+            .cover {
+                position: absolute;
+                border-left: 150px solid transparent;
+                border-right: 150px solid transparent;
+                border-top: 100px solid #e1e1e1;
+                border-bottom: 100px solid transparent;
+                transition: transform 0.75s;
+                transform-origin: top;
+                transform: rotateX(0deg);
+                z-index: -1;
+            }
+
+            .letter {
+                border-left: 150px solid #c7c7c7;
+                border-right: 150px solid #bbbbbb;
+                border-top: 100px solid transparent;
+                border-bottom: 100px solid #b2b2b2;
+            }
+
+            .paper {
+                width: 62%;
+            }
+            
+            .conf{
+                font-size: 30px !important;
+            }
+
+        }
+
+
+        @media (max-width: 320px) {
+            .cover {
+                position: absolute;
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                border-top: 100px solid #e1e1e1;
+                border-bottom: 100px solid transparent;
+                transition: transform 0.75s;
+                transform-origin: top;
+                transform: rotateX(0deg);
+                z-index: -1;
+                overflow: hidden;
+            }
+
+            .letter {
+                border-left: 100px solid #c7c7c7;
+                border-right: 100px solid #bbbbbb;
+                border-top: 100px solid transparent;
+                overflow: hidden;
+                border-bottom: 100px solid #b2b2b2;
+            }
+        }
+
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.4);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+
+        #acceptBtn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #51cfba;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+<h1 class="curveado">Desliza hacia abajo</h1>
+    <div class="content-todo" style="overflow: hidden; width: 100%;">
+        <div class="container-letter">
+            <div class="cover"></div>
+            <p class="paper">
+            </p>
+            <div class="letter"></div>
+        </div>
+        <div class="options" style="opacity: 0;">
+            <button id="toggle">Abrir</button>
+        </div>
+
+
+
+        <div class="container">
+            <div class="inf">
+                <p class="x1 regular">XV AÑOS</p>
+                <h1 class="curveado">Ximena De la Cruz</h1>
+            </div>
+
+            <div class="img-text-music">
+                <img class="imagen1" src="./img/image.webp">
+
+                <div class="dats">
+                    <article>
+                        <p class="regular">Lugar</p>
+                        <span>
+                            Privada Veracruz 114, Jesus del Monte, Jesús del Monte, State of Mexico, Mexico
+                        </span>
+                    </article>
+
+                    <article>
+                        <p class="regular">Fecha</p>
+                        <span>2024-08-10</span>
+                    </article>
+
+                    <article>
+                        <p class="regular">Hora</p>
+                        <span>17:30 pm</span>
+                    </article>
+
+                    <article>
+                        <p class="regular">Vestimenta</p>
+                        <span>Prohibido el rojo</span>
+                    </article>
+
+                    <div class="todoaudio">
+                        <div class="container1">
+                            <button id="playPauseBtn">▶️ Reproducir</button>
+                            <div class="audio-lines">
+                                <div class="line" id="line1"></div>
+                                <div class="line" id="line2"></div>
+                                <div class="line" id="line3"></div>
+                                <div class="line" id="line4"></div>
+                                <div class="line" id="line5"></div>
+                            </div>
+                        </div>
+                        <audio id="audio" src="./img/Y2meta.mp3"></audio>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="text-img">
+                <section>
+                    <div class="inf">
+                        <p class="regular">Mensaje de Ximena De la Cruz</p>
+                        <span style="font-size: 55px; margin-top: -20px; position: absolute; opacity: 0.5;">Con
+                            todo<br>cariño</span>
+                    </div>
+
+                    <p class="sect-1p regular" style="margin-top: 50px;">
+                        Hay momentos inolvidables que se atesoran en el corazón para siempre por esta razón quiero que
+                        compartas conmigo este día tan especial
+                    </p>
+
+                </section>
+                <section>
+                    <img class="medi" src="./img/2.png" alt="">
+                </section>
+            </div>
+
+            <div class="agradecimientos" style="margin-top: 100px;">
+                <h2>Agradecimientos</h2>
+                <h3>MIS PAPAS</h3>
+                <p>Jose Alfredo de la Cruz<br>Lucina Navarro Flores</p>
+
+                <h3 style="margin-top: 50px;">MIS PADRINOS</h3>
+                <p>Alonso Reyes Navarro<br>Fatima Rodriguez Estrada</p>
+                
+                <h2 class="conf" style="margin-top: 100px; text-align:center;">CONFIRMA TU ASISTENCIA</h2>
+            </div>
+
+
+            <div class="fecha">
+                <section>
+                    <img src="./img/3.png" alt="">
+                </section>
+
+                <section class="reloj">
+                    <p class="regular">Días restantes</p>
+
+                    <div class="time">
+                        <article>
+                            <span id="days">0</span>
+                            <article>Días</article>
+                        </article>
+                        <article>
+                            <span id="hours">0</span>
+                            <article>Horas</article>
+                        </article>
+                        <article>
+                            <span id="minutes">0</span>
+                            <article>Minutos</article>
+                        </article>
+                        <article>
+                            <span id="seconds">0</span>
+                            <article>Segundos</article>
+                        </article>
+                    </div>
+
+                    <p class="regular" style="font-size: 30px; margin-top: 50px;">!Aparta la fecha!</p>
+                </section>
+            </div>
+
+
+
+            <div class="maps">
+                
+                <h1 class="curveado" style="margin-top: 100px; text-align: center; color: #fff;">CAPILLA, LA MISA SERA A LAS 14:50 PM</h1>
+                <p class="curveado" style="text-align: center; padding: 20px 20px;">Monte Casino &
+                    ESQUINA MONTE REAL,
+                    JESUS DEL MONTE, Cuajimalpa de Morelos, 05260 Ciudad de México, CDMX</p>
+
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.0678091931613!2d-99.29402062562659!3d19.36621634279921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2073ace1dd8d3%3A0x551424fcf157dcf5!2sParroquia%20de%20Jes%C3%BAs%20del%20Monte!5e0!3m2!1ses!2smx!4v1718554245613!5m2!1ses!2smx"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    
+                    
+                <h1 class="curveado" style="margin-top: 100px; text-align: center; color: #fff;">SALON DE EVENTO</h1>
+
+                <p class="curveado" style="text-align: center; padding: 20px 20px;">Privada Veracruz 114, Jesus del
+                    Monte,
+                    Jesús del Monte,
+                    State of Mexico, Mexico a la(s) 17:30 pm</p>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.0031947936773!2d-99.30130152562654!3d19.36901434271016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d2072259ccedd7%3A0xbe8ca951472e284!2sPriv.%20Veracruz%20114%2C%20Jesus%20del%20Monte%2C%2052764%20Jes%C3%BAs%20del%20Monte%2C%20M%C3%A9x.!5e0!3m2!1ses!2smx!4v1718553386339!5m2!1ses!2smx"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+
+                <h1 class="esperamos regular" style="margin-bottom: 100px;">¡Te esperamos!</h1>
+
+                <footer style="text-align: center;">
+                    <span style="color: #fff;">
+                        Desarrollada por @RhoAiasTekkenKaioh@
+                    </span>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+
+
+
+
+
+    <div id="welcomeModal" class="modal">
+        <div class="modal-content">
+            <p>Invitaci&oacute;n A Mis XV Años, Ximena De la Cruz</p>
+            <button id="acceptBtn">Aceptar</button>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script>
+        // Configuración de la fecha objetivo
+        const targetDate = new Date('2024-08-10T17:30:00-05:00'); // Hora CDMX
+
+        function updateCountdown() {
+            const now = new Date();
+            const timeDifference = targetDate - now;
+
+            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+            document.getElementById('days').textContent = days;
+            document.getElementById('hours').textContent = hours;
+            document.getElementById('minutes').textContent = minutes;
+            document.getElementById('seconds').textContent = seconds;
+
+            if (timeDifference < 0) {
+                clearInterval(countdownInterval);
+                document.querySelector('.reloj p').textContent = '¡La fecha ha llegado!';
+                document.querySelector('.time').style.display = 'none';
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Llamar inmediatamente para no esperar 1 segundo
+    </script>
+
+    <script>
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const audio = document.getElementById('audio');
+        let isPlaying = false;
+
+        playPauseBtn.addEventListener('click', () => {
+            if (isPlaying) {
+                audio.pause();
+                playPauseBtn.textContent = '▶️ Reproducir';
+            } else {
+                audio.play().catch(error => {
+                    console.error('La reproducción automática fue prevenida', error);
+                });
+                playPauseBtn.textContent = '⏸️ Pausar';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        window.addEventListener('load', () => {
+            const modal = document.getElementById('welcomeModal');
+            const acceptBtn = document.getElementById('acceptBtn');
+
+            modal.style.display = 'flex';
+
+            acceptBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                playPauseBtn.click();
+            });
+        });
+
+    </script>
+
+    <script>
+        const toggleButton = document.querySelector('#toggle');
+        const coverElement = document.querySelector('.cover');
+        const cont = document.querySelector('.container-letter');
+
+        let isOpen = false; // Inicialmente está cerrado
+        let lastScrollPosition = 0;
+
+        // Función para manejar el cambio al hacer scroll
+        function handleScroll() {
+            const currentScrollPosition = window.scrollY;
+            const scrollThreshold = 50; // Umbral de desplazamiento
+        
+            if (Math.abs(currentScrollPosition - lastScrollPosition) > scrollThreshold) {
+                if (currentScrollPosition > lastScrollPosition && !isOpen) {
+                    isOpen = true;
+                    openCover();
+                } else if (currentScrollPosition < lastScrollPosition && isOpen) {
+                    isOpen = false;
+                    closeCover();
+                }
+                lastScrollPosition = currentScrollPosition;
+            }
+        }
+
+window.addEventListener('scroll', handleScroll);
+
+        // Función para abrir la cubierta
+        function openCover() {
+            coverElement.style.transform = 'rotateX(180deg)';
+            coverElement.style.zIndex = '0';
+            toggleButton.textContent = 'Cerrar';
+            cont.classList.add('open-animation'); // Añadir clase para activar animación
+        }
+
+        // Función para cerrar la cubierta
+        function closeCover() {
+            coverElement.style.transform = 'rotateX(0deg)';
+            coverElement.style.zIndex = '-1';
+            toggleButton.textContent = 'Abrir';
+            cont.classList.remove('open-animation'); // Remover clase para detener animación
+        }
+
+
+        // Listener del botón para cambiar el estado manualmente
+        toggleButton.addEventListener('click', () => {
+            isOpen = !isOpen;
+
+            if (isOpen) {
+                openCover();
+            } else {
+                closeCover();
+            }
+        });
+    </script>
+</body>
+
+</html>
