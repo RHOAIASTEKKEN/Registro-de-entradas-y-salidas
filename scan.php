@@ -39,10 +39,10 @@ function enviarCorreo($correo_tutor, $usuario, $entrada)
     }
 }
 
-$host = '154.49.142.52';
-$username = 'u811460462_java';
-$password = '1m*I]4$C+K9';
-$dbname = 'u811460462_java';
+$host = '';
+$username = '';
+$password = '';
+$dbname = '';
 $port = 3306;
 
 // Crear conexión
