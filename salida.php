@@ -9,10 +9,10 @@ require 'vendor/autoload.php';
 date_default_timezone_set('America/Mexico_City');
 
 // Aquí colocas las credenciales de tu base de datos
-$host = '154.49.142.52';
-$user = 'u811460462_java';
-$password = '1m*I]4$C+K9';
-$database = 'u811460462_java';
+$host = '';
+$user = '';
+$password = '';
+$database = '';
 $port = 3306;
 
 // Conexión a la base de datos
